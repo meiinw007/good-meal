@@ -20,7 +20,7 @@ class GoodMealApp extends StatelessWidget {
       theme: ThemeData(
         colorSchemeSeed: Colors.green,
         useMaterial3: true,
-	textTheme: GoogleFonts.sarabunTextTheme()'
+	textTheme: GoogleFonts.sarabunTextTheme(),
       ),
       home: const SplashPage(),
     );
