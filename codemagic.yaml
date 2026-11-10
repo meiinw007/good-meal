@@ -1,0 +1,27 @@
+workflows:
+  android-workflow:
+    name: Android Workflow
+    max_build_duration: 60
+    instance_type: linux_x2
+    environment:
+      flutter: stable
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+          source: true
+    scripts:
+      - name: Generate Android platform files
+        script: |
+          cp lib/main.dart /tmp/main.dart
+          flutter create --platforms=android --project-name good_meal --org com.goodmeal .
+          cp /tmp/main.dart lib/main.dart
+          rm -f test/widget_test.dart
+      - name: Get Flutter packages
+        script: flutter pub get
+      - name: Build APK
+        script: flutter build apk --release
+    artifacts:
+      - build/**/outputs/**/*.apk
