@@ -1,6 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-void main() => runApp(const KitchenFairyApp());
+// English font: bold brush-script look. Thai font: Sarabun (สารบัญ).
+// To change the English font, replace kaushanScript below (e.g. pacifico, lobster).
+String get englishFont => GoogleFonts.kaushanScript().fontFamily!;
+String get thaiFont => GoogleFonts.sarabun().fontFamily!;
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  try {
+    await GoogleFonts.pendingFonts([
+      GoogleFonts.kaushanScript(),
+      GoogleFonts.sarabun(),
+    ]).timeout(const Duration(seconds: 6));
+  } catch (_) {
+    // Offline: the app still opens with the default font.
+  }
+  runApp(const KitchenFairyApp());
+}
 
 // ---------- Palette (cozy pixel cream/tan/brown) ----------
 const cream = Color(0xFFFFF6E6);
@@ -206,6 +223,8 @@ class KitchenFairyApp extends StatelessWidget {
           useMaterial3: true,
           colorSchemeSeed: btnColor,
           scaffoldBackgroundColor: cream,
+          fontFamily: englishFont,
+          fontFamilyFallback: [thaiFont],
         ),
         home: ListenableBuilder(
           listenable: app,
