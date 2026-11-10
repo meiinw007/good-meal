@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // เอา URL ที่ได้จาก Deploy ใน Apps Script มาวางตรงนี้
 const String kScriptUrl = 'PASTE_YOUR_WEB_APP_URL_HERE';
@@ -19,6 +20,7 @@ class GoodMealApp extends StatelessWidget {
       theme: ThemeData(
         colorSchemeSeed: Colors.green,
         useMaterial3: true,
+	textTheme: GoogleFonts.sarabunTextTheme()'
       ),
       home: const SplashPage(),
     );
